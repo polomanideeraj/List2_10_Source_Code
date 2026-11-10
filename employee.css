@@ -1,0 +1,628 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    color: #172b4d;
+}
+
+.employee-header {
+    height: 65px;
+    background: #142f5c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    color: white;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.brand span {
+    color: #60a5fa;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.employee-id {
+    background: #244779;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.logout-btn {
+    background: white;
+    color: #142f5c;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.page-heading {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.page-heading h1 {
+    font-size: 27px;
+    margin-bottom: 7px;
+}
+
+.page-heading p {
+    color: #667085;
+    font-size: 13px;
+}
+
+.message {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.summary-card,
+.panel,
+.customer-info-panel {
+    background: white;
+    border: 1px solid #e1e8f0;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(20, 47, 92, 0.05);
+}
+
+.summary-card {
+    padding: 18px;
+}
+
+.summary-card p {
+    color: #667085;
+    font-size: 13px;
+}
+
+.summary-card h2 {
+    margin-top: 12px;
+    font-size: 26px;
+    color: #155eef;
+}
+
+.summary-card.pending h2 {
+    color: #f79009;
+}
+
+.summary-card.progress h2 {
+    color: #7c3aed;
+}
+
+.summary-card.resolved h2 {
+    color: #12a150;
+}
+
+.panel {
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.panel h2,
+.panel h3 {
+    margin-bottom: 17px;
+}
+
+.search-row {
+    display: flex;
+    gap: 10px;
+}
+
+input,
+select {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 11px;
+    font-size: 13px;
+    outline: none;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    border-color: #2563eb;
+}
+
+.search-row input {
+    flex: 1;
+}
+
+button {
+    cursor: pointer;
+}
+
+.search-row button {
+    background: #2457e6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0 20px;
+    font-weight: bold;
+}
+
+.customer-section {
+    background: white;
+    border: 1px solid #e1e8f0;
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+.customer-heading {
+    margin-bottom: 18px;
+}
+
+.customer-heading p {
+    color: #667085;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.customer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.customer-option {
+    min-height: 95px;
+    border: 1px solid #dce5f0;
+    background: #f9fbff;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: #183b70;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.customer-option:hover,
+.customer-option.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.option-icon {
+    font-size: 25px;
+}
+
+.customer-info-panel {
+    padding: 18px;
+    margin-top: 20px;
+}
+
+.info-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.info-panel-heading h3 {
+    margin: 0;
+}
+
+.info-panel-heading button {
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 5px;
+    padding: 7px 12px;
+}
+
+.info-content {
+    overflow-x: auto;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-row input {
+    width: 260px;
+    max-width: 100%;
+}
+
+.filter-row select {
+    min-width: 150px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 13px 11px;
+    border-bottom: 1px solid #e8edf3;
+    font-size: 12px;
+}
+
+th {
+    background: #f4f7fb;
+    color: #344054;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #667085;
+}
+
+.footer {
+    text-align: center;
+    color: #98a2b3;
+    font-size: 12px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 750px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .customer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-row {
+        flex-direction: column;
+    }
+
+    .filter-row input,
+    .filter-row select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 450px) {
+    .employee-header {
+        padding: 0 15px;
+    }
+
+    .employee-id {
+        display: none;
+    }
+
+    .dashboard-container {
+        padding: 0 12px;
+    }
+
+    .summary-grid,
+    .customer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-row {
+        flex-direction: column;
+    }
+
+    .search-row button {
+        padding: 12px;
+    }
+}
+
+.account-summary {
+    margin-bottom: 20px;
+}
+
+.account-total {
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.account-total span {
+    color: #475569;
+    font-size: 14px;
+}
+
+.account-total h2 {
+    color: #155eef;
+    font-size: 27px;
+    margin: 10px 0;
+}
+
+.account-total small {
+    color: #64748b;
+}
+
+.balance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    border-bottom: 1px solid #e8edf3;
+}
+
+.balance-row p {
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ==========================================
+   ALL CUSTOMER COMPLAINTS & LOAN APPROVAL
+========================================== */
+
+.panel.data-panel {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 28px;
+    margin-bottom: 26px;
+    background: #ffffff;
+    border: 1px solid #e1e8f0;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(20, 50, 90, 0.07);
+    overflow: hidden;
+}
+
+.panel.data-panel h2 {
+    margin: 0 0 22px;
+    color: #17365d;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Search and filters */
+
+.panel.data-panel .filter-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.panel.data-panel .filter-row input {
+    width: 325px;
+    max-width: 100%;
+    height: 49px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    border: 1px solid #cbd7e5;
+    border-radius: 9px;
+    background: #fff;
+    color: #17365d;
+    font-size: 15px;
+}
+
+.panel.data-panel .filter-row select {
+    min-width: 185px;
+    height: 49px;
+    padding: 0 14px;
+    border: 1px solid #cbd7e5;
+    border-radius: 9px;
+    background: #fff;
+    color: #17365d;
+    font-size: 15px;
+}
+
+/* Table wrapper */
+
+.panel.data-panel .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 9px;
+}
+
+/* Tables */
+
+.panel.data-panel .table-wrapper table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.panel.data-panel .table-wrapper thead {
+    background: #f1f5fa;
+}
+
+.panel.data-panel .table-wrapper th {
+    padding: 16px 14px;
+    color: #17365d;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid #dce5ef;
+}
+
+.panel.data-panel .table-wrapper td {
+    padding: 16px 14px;
+    color: #24466d;
+    font-size: 14px;
+    border-bottom: 1px solid #e5ebf2;
+    vertical-align: middle;
+}
+
+.panel.data-panel .table-wrapper tbody tr:hover {
+    background: #f7faff;
+}
+
+/* Status dropdowns */
+
+.panel.data-panel .table-wrapper td select {
+    min-width: 135px;
+    height: 42px;
+    padding: 0 10px;
+    border: 1px solid #cbd7e5;
+    border-radius: 8px;
+    background: #fff;
+    color: #17365d;
+    font-size: 14px;
+}
+
+/* Update buttons */
+
+.panel.data-panel .table-wrapper td button {
+    height: 40px;
+    padding: 0 16px;
+    margin-left: 6px;
+    border: none;
+    border-radius: 7px;
+    background: #1769aa;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.panel.data-panel .table-wrapper td button:hover {
+    background: #105487;
+}
+
+.panel.data-panel .table-wrapper td button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Empty states */
+
+.panel.data-panel .empty-state {
+    padding: 25px;
+    text-align: center;
+    color: #718096;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .panel.data-panel {
+        padding: 18px;
+    }
+
+    .panel.data-panel h2 {
+        font-size: 23px;
+    }
+
+    .panel.data-panel .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .panel.data-panel .filter-row input,
+    .panel.data-panel .filter-row select {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   COLOURED STATUS BADGES
+   COMPLAINTS AND LOANS
+========================================== */
+
+.record-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+
+/* Pending - Yellow */
+
+.status-pending {
+    background: #fff4cc;
+    color: #946200;
+    border-color: #f5d778;
+}
+
+/* In Progress - Blue */
+
+.status-progress {
+    background: #dceeff;
+    color: #1559a6;
+    border-color: #a9d2ff;
+}
+
+/* Documents Pending - Orange */
+
+.status-documents {
+    background: #ffead5;
+    color: #a84b00;
+    border-color: #ffc48e;
+}
+
+/* Approved / Resolved - Green */
+
+.status-approved {
+    background: #d9f7e5;
+    color: #16743b;
+    border-color: #a7e8bd;
+}
+
+/* Rejected - Red */
+
+.status-rejected {
+    background: #ffe0e0;
+    color: #b42318;
+    border-color: #ffb3b3;
+}
+
+/* Unknown - Grey */
+
+.status-unknown {
+    background: #edf0f4;
+    color: #596579;
+    border-color: #d6dce5;
+}

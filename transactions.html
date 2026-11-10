@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transactions | FinAssist</title>
+
+    <link rel="stylesheet" href="./app.css">
+    <script src="./app.js" defer></script>
+
+    <style>
+        .transactions-panel {
+            background: white;
+            padding: 24px;
+            border-radius: 14px;
+            margin-top: 20px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .transactions-panel h2 {
+            margin-top: 0;
+            color: #183354;
+        }
+
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        .transactions-table th,
+        .transactions-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8edf3;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .transactions-table th {
+            background: #f4f7fb;
+            color: #344054;
+            font-weight: 700;
+        }
+
+        .transactions-table tbody tr:hover {
+            background: #f8faff;
+        }
+
+        .credit {
+            color: #159447;
+            font-weight: 600;
+        }
+
+        .debit {
+            color: #d64545;
+            font-weight: 600;
+        }
+
+        .transaction-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #eaf8ef;
+            color: #159447;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .transaction-status.pending {
+            background: #fff5df;
+            color: #a66b00;
+        }
+
+        .transaction-status.failed,
+        .transaction-status.rejected {
+            background: #fdecec;
+            color: #d64545;
+        }
+
+        .transaction-message {
+            padding: 24px;
+            text-align: center;
+            color: #667085;
+        }
+
+        .transaction-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .transaction-count {
+            color: #667085;
+            font-size: 13px;
+        }
+
+        .refresh-transactions {
+            padding: 9px 15px;
+            border: 1px solid #dce5f1;
+            border-radius: 8px;
+            background: white;
+            color: #2864e8;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .refresh-transactions:hover {
+            background: #edf3ff;
+        }
+
+        /* =====================================
+           TRANSACTIONS HEADER
+        ===================================== */
+
+        .app-layout .main-content header.topbar {
+            width: 100% !important;
+            min-height: 110px !important;
+            height: auto !important;
+            box-sizing: border-box !important;
+
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+
+            gap: 20px !important;
+            padding: 20px 32px !important;
+            margin: 0 !important;
+
+            background: #ffffff !important;
+            border-bottom: 1px solid #e5eaf2 !important;
+        }
+
+        .app-layout .main-content header.topbar > div:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-layout .main-content header.topbar h1 {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 32px !important;
+            line-height: 1.3 !important;
+            font-weight: 700 !important;
+            color: #173765 !important;
+        }
+
+        .app-layout .main-content header.topbar p {
+            display: block !important;
+            margin: 8px 0 0 !important;
+            padding: 0 !important;
+            font-size: 17px !important;
+            line-height: 1.5 !important;
+            color: #64748b !important;
+        }
+
+        .app-layout .main-content header.topbar .profile-info {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            flex: 0 0 auto;
+            gap: 12px !important;
+            margin: 0 0 0 auto !important;
+            padding: 0 !important;
+            white-space: nowrap;
+            color: #173765 !important;
+            font-size: 15px !important;
+        }
+
+        .app-layout .main-content header.topbar [data-avatar] {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e8efff;
+            color: #245bd6;
+        }
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 600px) {
+            .transactions-panel {
+                padding: 15px;
+            }
+
+            .transaction-toolbar {
+                align-items: flex-start;
+            }
+
+            .app-layout .main-content header.topbar {
+                min-height: 95px !important;
+                padding: 16px !important;
+                gap: 10px !important;
+            }
+
+            .app-layout .main-content header.topbar h1 {
+                font-size: 24px !important;
+            }
+
+            .app-layout .main-content header.topbar p {
+                font-size: 13px !important;
+            }
+
+            .app-layout .main-content header.topbar .profile-info {
+                font-size: 12px !important;
+                gap: 8px !important;
+            }
+
+            .app-layout .main-content header.topbar [data-avatar] {
+                width: 32px;
+                height: 32px;
+                min-width: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body data-page="transactions">
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">Fin<span>Assist</span></div>
+
+        <div class="nav-label">MAIN MENU</div>
+
+        <nav>
+
+            <a class="nav-link" href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <button
+                class="nav-link services-toggle"
+                id="servicesToggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="servicesSubmenu">
+
+                <span class="nav-icon">▦</span>
+                <span>Services</span>
+                <span class="services-arrow" id="servicesArrow">⌄</span>
+
+            </button>
+
+            <div class="services-submenu" id="servicesSubmenu" hidden>
+
+                <a class="nav-link" href="accounts.html">
+                    My Accounts
+                </a>
+
+                <a class="nav-link active" href="transactions.html">
+                    Transactions
+                </a>
+
+                <a class="nav-link" href="cards.html">
+                    My Cards
+                </a>
+
+                <a class="nav-link" href="loans.html">
+                    Loan Applications
+                </a>
+
+                <a class="nav-link" href="applications.html">
+                    My Applications
+                </a>
+
+                <a class="nav-link" href="complaints.html">
+                    Customer Support
+                </a>
+
+            </div>
+
+            <a class="nav-link" href="emi-calculator.html">
+                <span class="nav-icon">%</span>
+                <span>EMI Calculator</span>
+            </a>
+
+            <a class="nav-link" href="chatbot.html">
+                <span class="nav-icon">✦</span>
+                AI Assistant
+            </a>
+
+        </nav>
+
+        <div class="sidebar-top">
+
+            <a class="nav-link" href="#" data-logout>
+                <span class="nav-icon">↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <h1>Transactions</h1>
+                <p>View your recent account activity.</p>
+            </div>
+
+            <div class="profile-info">
+                <span data-customer-name>Customer</span>
+                <span data-avatar>👤</span>
+            </div>
+
+        </header>
+
+        <!-- TRANSACTIONS TABLE -->
+        <section class="transactions-panel">
+
+            <div class="transaction-toolbar">
+
+                <div>
+                    <h2>Recent Transactions</h2>
+                    <span
+                        class="transaction-count"
+                        id="transactionCount">
+                        Loading transactions...
+                    </span>
+                </div>
+
+                <button
+                    type="button"
+                    class="refresh-transactions"
+                    id="refreshTransactions">
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+            <table class="transactions-table">
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Account</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactionsBody">
+
+                    <tr>
+                        <td colspan="6" class="transaction-message">
+                            Loading your transactions...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const transactionsBody =
+        document.getElementById("transactionsBody");
+
+    const transactionCount =
+        document.getElementById("transactionCount");
+
+    const refreshButton =
+        document.getElementById("refreshTransactions");
+
+    const TRANSACTIONS_API = "/api/my-transactions";
+
+
+    // Format amount in Indian currency.
+    function formatAmount(amount) {
+
+        return Number(amount || 0).toLocaleString("en-IN", {
+            style: "currency",
+            currency: "INR",
+            minimumFractionDigits: 2
+        });
+    }
+
+
+    // Format transaction date.
+    function formatDate(value) {
+
+        if (!value) return "—";
+
+        const date = new Date(
+            String(value).includes("T")
+                ? value
+                : String(value).replace(" ", "T")
+        );
+
+        if (Number.isNaN(date.getTime())) {
+            return String(value);
+        }
+
+        return date.toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+    }
+
+
+    // Display transactions safely.
+    function renderTransactions(transactions) {
+
+        transactionsBody.replaceChildren();
+
+        if (!transactions.length) {
+
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 6;
+            cell.className = "transaction-message";
+            cell.textContent = "No transactions found.";
+
+            row.appendChild(cell);
+            transactionsBody.appendChild(row);
+
+            transactionCount.textContent = "0 transactions";
+
+            return;
+        }
+
+        transactionCount.textContent =
+            `${transactions.length} transaction(s)`;
+
+        transactions.forEach(transaction => {
+
+            const row = document.createElement("tr");
+
+            const type = String(
+                transaction.transaction_type || ""
+            ).toLowerCase();
+
+            const isCredit = type.includes("credit");
+
+            const dateCell = document.createElement("td");
+            dateCell.textContent =
+                formatDate(transaction.transaction_date);
+
+            const descriptionCell = document.createElement("td");
+            descriptionCell.textContent =
+                transaction.description || "Transaction";
+
+            const accountCell = document.createElement("td");
+
+            const accountNumber =
+                String(transaction.account_number || "");
+
+            accountCell.textContent = accountNumber
+                ? "•••• " + accountNumber.slice(-4)
+                : "—";
+
+            const typeCell = document.createElement("td");
+            typeCell.textContent =
+                transaction.transaction_type || "—";
+
+            typeCell.className = isCredit ? "credit" : "debit";
+
+            const amountCell = document.createElement("td");
+
+            const amount = Number(transaction.amount || 0);
+
+            amountCell.textContent =
+                (isCredit ? "+" : "−") + formatAmount(amount);
+
+            amountCell.className =
+                isCredit ? "credit" : "debit";
+
+            const statusCell = document.createElement("td");
+
+            const status = document.createElement("span");
+
+            status.className = "transaction-status";
+
+            const statusText =
+                String(transaction.status || "Unknown");
+
+            status.textContent = statusText;
+
+            const normalizedStatus = statusText.toLowerCase();
+
+            if (
+                normalizedStatus.includes("pending")
+            ) {
+                status.classList.add("pending");
+            } else if (
+                normalizedStatus.includes("failed") ||
+                normalizedStatus.includes("rejected")
+            ) {
+                status.classList.add("failed");
+            }
+
+            statusCell.appendChild(status);
+
+            row.append(
+                dateCell,
+                descriptionCell,
+                accountCell,
+                typeCell,
+                amountCell,
+                statusCell
+            );
+
+            transactionsBody.appendChild(row);
+
+        });
+
+    }
+
+
+    // Load actual logged-in customer's transactions.
+    async function loadTransactions() {
+
+        refreshButton.disabled = true;
+        refreshButton.textContent = "Loading...";
+
+        transactionCount.textContent =
+            "Loading transactions...";
+
+        try {
+
+            const response = await fetch(TRANSACTIONS_API, {
+
+                method: "GET",
+
+                credentials: "same-origin",
+
+                headers: {
+                    "Accept": "application/json"
+                }
+
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+
+                throw new Error(
+                    result.message ||
+                    "Unable to load transactions."
+                );
+
+            }
+
+            const transactions =
+                Array.isArray(result.transactions)
+                    ? result.transactions
+                    : [];
+
+            renderTransactions(transactions);
+
+        } catch (error) {
+
+            console.error(
+                "Transaction loading error:",
+                error
+            );
+
+            transactionsBody.replaceChildren();
+
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+
+            cell.colSpan = 6;
+            cell.className = "transaction-message";
+            cell.textContent = error.message ||
+                "Unable to load transactions.";
+
+            row.appendChild(cell);
+            transactionsBody.appendChild(row);
+
+            transactionCount.textContent =
+                "Could not load transactions.";
+
+        } finally {
+
+            refreshButton.disabled = false;
+            refreshButton.textContent = "↻ Refresh";
+
+        }
+
+    }
+
+
+    refreshButton.addEventListener(
+        "click",
+        loadTransactions
+    );
+
+    loadTransactions();
+
+});
+</script>
+
+</body>
+</html>

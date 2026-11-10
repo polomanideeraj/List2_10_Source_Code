@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinAssist AI | Banking Assistant</title>
+
+    <link rel="stylesheet" href="./app.css">
+    <link rel="stylesheet" href="./chatbot.css">
+
+    <script src="./app.js" defer></script>
+    <script src="./chatbot.js" defer></script>
+</head>
+
+<body data-page="chatbot">
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">Fin<span>Assist</span></div>
+        <div class="nav-label">MAIN MENU</div>
+
+        
+<nav>
+    <a class="nav-link" href="dashboard.html">
+        <span class="nav-icon">⌂</span>
+        Dashboard
+    </a>
+
+    <button
+        class="nav-link services-toggle"
+        id="servicesToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="servicesSubmenu"
+    >
+        <span class="nav-icon">▦</span>
+        <span>Services</span>
+        <span class="services-arrow" id="servicesArrow">⌄</span>
+    </button>
+
+    <div class="services-submenu" id="servicesSubmenu" hidden>
+        <a class="nav-link" href="accounts.html">My Accounts</a>
+        <a class="nav-link" href="transactions.html">Transactions</a>
+        <a class="nav-link" href="cards.html">My Cards</a>
+        <a class="nav-link" href="loans.html">Loan Applications</a>
+        <a class="nav-link" href="applications.html">My Applications</a>
+        <a class="nav-link" href="complaints.html">Customer Support</a>
+    </div>
+
+    <a class="nav-link active" href="chatbot.html">
+        <span class="nav-icon">✦</span>
+        AI Assistant
+    </a>
+</nav>
+
+
+        <div class="sidebar-top">
+            <a class="nav-link" href="#" data-logout>
+                <span class="nav-icon">↪</span>
+                Log Out
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-area chatbot-main">
+
+        <header class="topbar">
+            <div>
+                <h1>AI Banking Assistant</h1>
+                <p>Your personal banking assistant, available anytime.</p>
+            </div>
+
+            <div class="profile-chip">
+                <div class="avatar" data-avatar></div>
+                <span data-customer-name>Customer</span>
+            </div>
+        </header>
+
+        <div class="content chatbot-content">
+
+            <section class="chatbot-workspace">
+
+                <div class="chatbot-heading">
+                    <div class="chatbot-identity">
+                        <div class="ai-logo">F</div>
+
+                        <div>
+                            <h2>FinAssist Intelligence</h2>
+                            <p>
+                                <span class="online-dot"></span>
+                                Your AI banking assistant
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="chat-header-actions">
+                        <button
+                            type="button"
+                            class="chat-icon-button"
+                            id="clearChatBtn"
+                            title="Clear conversation"
+                            aria-label="Clear conversation">
+                            ↻
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    class="chat-messages"
+                    id="chatMessages"
+                    aria-live="polite"
+                    aria-label="Conversation">
+
+                    <div class="welcome-screen" id="welcomeScreen">
+                        <div class="welcome-icon">F</div>
+
+                        <h2>
+                            Hello, <span data-customer-name>Customer</span>!
+                        </h2>
+
+                        <p>
+                            I'm your FinAssist AI banking assistant.
+                            What would you like to do today?
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="quick-action-area" id="quickActionArea">
+                    <div class="quick-action-heading">
+                        <span>Try asking</span>
+                    </div>
+
+                    <div class="quick-actions">
+
+                        <button
+                            type="button"
+                            class="quick-action"
+                            data-question="Show all my accounts and their balances">
+                            <span>◈</span>
+                            My accounts
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-action"
+                            data-question="Show my recent transactions">
+                            <span>↗</span>
+                            Recent transactions
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-action"
+                            data-question="Show my credit and debit cards separately">
+                            <span>▣</span>
+                            My cards
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-action"
+                            data-question="Show my loan applications and their status">
+                            <span>▤</span>
+                            Loan applications
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-action"
+                            data-question="Show the status of my complaints">
+                            <span>◉</span>
+                            My complaints
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-action"
+                            data-question="Analyze my spending using my transaction history">
+                            <span>✧</span>
+                            Spending analysis
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="chat-input-section">
+                    <form class="chat-form" id="chatForm">
+
+                        <textarea
+                            id="chatInput"
+                            class="chat-input"
+                            placeholder="Ask anything about your banking..."
+                            rows="1"
+                            maxlength="2000"
+                            aria-label="Type your banking question"
+                            required></textarea>
+
+                        <button
+                            type="submit"
+                            class="send-button"
+                            id="sendButton"
+                            aria-label="Send message">
+                            <span>↑</span>
+                        </button>
+
+                    </form>
+
+                    <div class="chat-input-footer">
+                        <span>
+                            FinAssist AI · Your personal banking assistant
+                        </span>
+                        <span id="characterCount">0 / 2000</span>
+                    </div>
+                </div>
+
+            </section>
+
+            <div class="chatbot-footer">
+                FinAssist · AI-Assisted Smart Banking Services
+            </div>
+
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

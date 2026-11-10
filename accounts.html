@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinAssist | My Accounts</title>
+
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="accounts.css">
+
+    <script src="app.js" defer></script>
+    <script src="accounts.js" defer></script>
+</head>
+
+<body>
+
+<div class="fa-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="fa-sidebar">
+        <div class="fa-brand">
+            <div class="fa-brand-icon">F</div>
+            <span>FinAssist</span>
+        </div>
+
+        <div class="fa-nav-label">MAIN MENU</div>
+
+        <nav class="fa-navigation">
+            <a href="dashboard.html" class="fa-nav-link">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="accounts.html" class="fa-nav-link active">
+                <span>▣</span> My Accounts
+            </a>
+
+            <a href="transactions.html" class="fa-nav-link">
+                <span>⇄</span> Transactions
+            </a>
+
+            <a href="cards.html" class="fa-nav-link">
+                <span>▤</span> Cards
+            </a>
+
+            <a href="loans.html" class="fa-nav-link">
+                <span>⌂</span> Loans
+            </a>
+
+            <a href="complaints.html" class="fa-nav-link">
+                <span>☏</span> Complaints
+            </a>
+
+            <a href="chatbot.html" class="fa-nav-link">
+                <span>✦</span> AI Assistant
+            </a>
+        </nav>
+
+        <div class="fa-sidebar-top">
+            <a href="login.html" class="fa-nav-link">
+                <span>↪</span> Logout
+            </a>
+        </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="fa-main">
+
+        <!-- TOP BAR -->
+        <header class="fa-topbar">
+            <div>
+                <p class="fa-topbar-subtitle">CUSTOMER PORTAL</p>
+                <h2>My Accounts</h2>
+            </div>
+
+            <div class="fa-profile">
+                <div class="fa-profile-avatar">U</div>
+                <div>
+                    <strong id="customerName">Customer</strong>
+                    <small>Customer</small>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ACCOUNTS MAIN SCREEN -->
+        <section id="accountsMainView">
+
+            <div class="fa-welcome">
+                <div>
+                    <h1>Manage Your Accounts</h1>
+                    <p>View your account details, balances and account status.</p>
+                </div>
+
+                <button type="button" id="showAddAccountBtn" class="fa-primary-btn">
+                    + Add Account
+                </button>
+            </div>
+
+
+            <!-- SUMMARY -->
+            <div class="fa-summary-grid">
+
+                <div class="fa-summary-card">
+                    <div class="fa-summary-heading">
+                        <span>Selected Account Balance</span>
+                        <span class="fa-summary-icon">₹</span>
+                    </div>
+
+                    <h2 id="totalAccountBalance">₹0.00</h2>
+
+                    <select id="balanceAccountSelect">
+                        <option value="">Select an account</option>
+                    </select>
+
+                    <small>Balance of the selected account</small>
+                </div>
+
+                <div class="fa-summary-card">
+                    <div class="fa-summary-heading">
+                        <span>Total Accounts</span>
+                        <span class="fa-summary-icon">▣</span>
+                    </div>
+
+                    <h2 id="accountCount">0</h2>
+                    <small>Accounts linked to your profile</small>
+                </div>
+
+            </div>
+
+
+            <!-- ACCOUNT LIST -->
+            <div class="fa-section-heading">
+                <div>
+                    <h2>Your Accounts</h2>
+                    <p>Manage your Savings and Current accounts.</p>
+                </div>
+            </div>
+
+            <div id="accountsList" class="fa-accounts-grid">
+
+                <!-- Account cards are added by JavaScript -->
+
+            </div>
+
+            <div id="accountsMessage" class="fa-message" hidden></div>
+
+        </section>
+
+
+        <!-- ADD ACCOUNT SCREEN -->
+        <section id="addAccountPanel" class="fa-add-screen" hidden>
+
+            <div class="fa-add-container">
+
+                <div class="fa-add-header">
+
+                    <button type="button" id="closeAddAccountBtn" class="fa-back-btn">
+                        ← Back to Accounts
+                    </button>
+
+                    <div class="fa-add-title">
+                        <div class="fa-add-icon">＋</div>
+                        <h1>Open a New Account</h1>
+                        <p>Enter the details below to create another bank account.</p>
+                    </div>
+
+                </div>
+
+
+                <form id="addAccountForm">
+
+                    <div class="fa-form-group">
+                        <label for="newAccountType">Account Type</label>
+
+                        <select id="newAccountType" required>
+                            <option value="">Choose account type</option>
+                            <option value="Savings">Savings Account</option>
+                            <option value="Current">Current Account</option>
+                        </select>
+
+                        <small>
+                            Choose the type of account you want to open.
+                        </small>
+                    </div>
+
+
+                    <div class="fa-form-group">
+                        <label for="initialDeposit">Initial Deposit (₹)</label>
+
+                        <input
+                            type="number"
+                            id="initialDeposit"
+                            min="0"
+                            max="100000000"
+                            step="0.01"
+                            placeholder="Enter initial deposit"
+                            required
+                        >
+
+                        <small>
+                            Enter the amount you want to deposit initially.
+                        </small>
+                    </div>
+
+
+                    <div class="fa-info-box">
+                        <span>ⓘ</span>
+                        <p>
+                            Your account number and IFSC code will be
+                            generated automatically after account creation.
+                        </p>
+                    </div>
+
+
+                    <div id="createAccountMessage" class="fa-message" hidden></div>
+
+
+                    <div class="fa-form-actions">
+
+                        <button
+                            type="button"
+                            id="cancelAddAccountBtn"
+                            class="fa-secondary-btn"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="createAccountBtn"
+                            class="fa-primary-btn"
+                        >
+                            Create Account
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

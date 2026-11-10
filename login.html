@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Login | FinAssist</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top-header">
+    <div class="header-inner">
+        <a href="login.html" class="brand">
+            <span class="brand-icon">F</span>
+            <span>FINASSIST</span>
+        </a>
+        <div class="header-tagline">SMART BANKING. SIMPLER SUPPORT.</div>
+    </div>
+</header>
+
+<main class="page-content">
+    <section class="login-card">
+        <div class="welcome-icon" id="welcomeIcon">👋</div>
+        <p class="small-heading" id="formEyebrow">YOUR PERSONAL ASSISTANT</p>
+        <h1 id="formTitle">Welcome Back!</h1>
+        <p class="login-description" id="formDescription">Sign in to access your FinAssist account.</p>
+
+        <div class="role-selection" id="roleSelection">
+            <button type="button" class="role-button active" id="customerRole" aria-pressed="true">
+                <span class="role-icon">👤</span>
+                <span class="role-text">
+                    <strong>Customer Login</strong>
+                    <small>Access your banking account</small>
+                </span>
+                <span class="role-check">✓</span>
+            </button>
+            <button type="button" class="role-button" id="employeeRole" aria-pressed="false">
+                <span class="role-icon">💼</span>
+                <span class="role-text">
+                    <strong>Employee Login</strong>
+                    <small>Manage customer requests</small>
+                </span>
+                <span class="role-check">✓</span>
+            </button>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group" id="customerNameGroup">
+                <label for="customerName">Full name</label>
+                <input type="text" id="customerName" name="customerName" placeholder="Enter your full name" autocomplete="name" maxlength="80" required>
+            </div>
+
+            <div class="form-group" id="customerEmailGroup">
+                <label for="customerEmail">Email address</label>
+                <input type="email" id="customerEmail" name="customerEmail" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+
+            <div class="form-group" id="employeeIdGroup" hidden>
+                <label for="employeeId">Employee ID</label>
+                <input type="text" id="employeeId" name="employeeId" placeholder="Enter your employee ID" autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="customerPassword" id="passwordLabel">4-digit MPIN</label>
+                <div class="password-wrapper">
+                    <input type="password" id="customerPassword" name="mpin" placeholder="Enter your 4-digit MPIN" autocomplete="current-password" inputmode="numeric" maxlength="4" required>
+                    <button type="button" id="togglePassword" class="toggle-password" aria-label="Show MPIN" aria-controls="customerPassword">Show</button>
+                </div>
+            </div>
+
+            <button type="submit" class="login-button" id="loginButton">Login <span>→</span></button>
+            <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="register-prompt" id="registerPrompt">
+            Don't have an account?
+            <button type="button" id="showRegister">Create account</button>
+        </div>
+
+        <form id="registerForm" hidden>
+            <div class="form-group">
+                <label for="registerName">Full name</label>
+                <input type="text" id="registerName" placeholder="Enter your full name" maxlength="80" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email address</label>
+                <input type="email" id="registerEmail" placeholder="Enter your email" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPhone">Mobile number</label>
+                <input type="tel" id="registerPhone" placeholder="10-digit mobile number" inputmode="numeric" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <label for="registerMpin">Create 4-digit MPIN</label>
+                <div class="password-wrapper">
+                    <input type="password" id="registerMpin" placeholder="Create your MPIN" inputmode="numeric" maxlength="4" required>
+                    <button type="button" class="toggle-password" data-toggle="registerMpin">Show</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmMpin">Confirm MPIN</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirmMpin" placeholder="Re-enter your MPIN" inputmode="numeric" maxlength="4" required>
+                    <button type="button" class="toggle-password" data-toggle="confirmMpin">Show</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="accountType">Account type</label>
+                <select id="accountType" required>
+                    <option value="Savings">Savings Account</option>
+                    <option value="Current">Current Account</option>
+                </select>
+            </div>
+            <button type="submit" class="login-button" id="registerButton">Create Account <span>→</span></button>
+            <p id="registerMessage" class="message" role="status" aria-live="polite"></p>
+            <div class="register-prompt">
+                Already have an account?
+                <button type="button" id="showLogin">Login</button>
+            </div>
+        </form>
+
+        <p class="security-note"><span>🔒</span> Your banking access is protected</p>
+    </section>
+</main>
+
+<footer class="page-footer">© 2026 FinAssist. Your personal banking assistant.</footer>
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,1251 @@
+
+/* ==========================================
+   FINASSIST - MY CARDS PAGE
+   ========================================== */
+
+:root {
+    --primary: #1769d2;
+    --primary-dark: #103d78;
+    --navy: #123d73;
+    --background: #f3f6fb;
+    --white: #ffffff;
+    --text: #19324f;
+    --muted: #718096;
+    --border: #e3eaf2;
+    --green: #168653;
+    --red: #d93645;
+    --shadow: 0 5px 20px rgba(22, 50, 85, 0.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* ==========================================
+   APP LAYOUT
+   ========================================== */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ==========================================
+   SIDEBAR
+   ========================================== */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: var(--navy);
+    color: white;
+    padding: 28px 17px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+    margin-bottom: 38px;
+    padding-left: 10px;
+    color: white;
+}
+
+.brand span {
+    color: #8fc5ff;
+}
+
+.nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #a9c4e5;
+    margin: 0 0 15px 10px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-link {
+    width: 100%;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 13px;
+    color: #e4efff;
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.nav-icon {
+    width: 19px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.services-toggle {
+    justify-content: flex-start;
+}
+
+.services-arrow {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+}
+
+.services-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 12px;
+    overflow: hidden;
+}
+
+.services-submenu .nav-link {
+    font-size: 13px;
+    min-height: 42px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+/* ==========================================
+   MAIN AREA
+   ========================================== */
+
+.main-area {
+    width: calc(100% - 250px);
+    min-width: 0;
+    min-height: 100vh;
+    margin-left: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================
+   TOPBAR
+   ========================================== */
+
+.topbar {
+    width: 100%;
+    min-height: 100px;
+    padding: 22px 35px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 3px 12px rgba(20, 50, 90, 0.035);
+}
+
+.topbar h1 {
+    font-size: 25px;
+    font-weight: 700;
+    color: #173e70;
+}
+
+.topbar p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.profile-chip {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e4efff;
+    color: var(--primary);
+    font-weight: 800;
+}
+
+/* ==========================================
+   CONTENT
+   ========================================== */
+
+.content {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px 35px 40px;
+    flex: 1;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.page-heading h2 {
+    color: #173e70;
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.page-heading p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+button {
+    font-family: inherit;
+}
+
+.primary-btn,
+.secondary-btn {
+    min-height: 41px;
+    padding: 10px 17px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+}
+
+.primary-btn:hover {
+    background: #1055ae;
+    border-color: #1055ae;
+}
+
+.secondary-btn {
+    background: white;
+    color: #385575;
+    border: 1px solid #d8e2ef;
+}
+
+.secondary-btn:hover {
+    background: #edf4fc;
+}
+
+/* ==========================================
+   MESSAGE
+   ========================================== */
+
+.message {
+    display: none;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.message:not(:empty) {
+    display: block;
+}
+
+/* ==========================================
+   ADD CARD PANEL
+   ========================================== */
+
+.add-card-panel {
+    display: none;
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: var(--shadow);
+}
+
+.add-card-panel h3 {
+    font-size: 18px;
+    color: #173e70;
+    margin-bottom: 8px;
+}
+
+.form-description {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 23px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #344c68;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 43px;
+    padding: 10px 12px;
+    border: 1px solid #d8e1ed;
+    border-radius: 7px;
+    background: white;
+    color: var(--text);
+    outline: none;
+    font-size: 13px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(23, 105, 210, 0.09);
+}
+
+.form-group input[readonly] {
+    background: #f5f7fa;
+    color: #65758a;
+}
+
+.form-group small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.expiry-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.expiry-inputs input:first-child {
+    max-width: 90px;
+}
+
+.expiry-inputs input:last-child {
+    max-width: 130px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+/* ==========================================
+   SUMMARY BOXES
+   ========================================== */
+
+.cards-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 25px 0 32px;
+}
+
+.summary-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 21px 23px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-box p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.summary-box h3 {
+    color: #173e70;
+    font-size: 29px;
+    font-weight: 750;
+}
+
+/* ==========================================
+   SAVED CARDS SECTION
+   ========================================== */
+
+.cards-section {
+    width: 100%;
+}
+
+.cards-section > h3 {
+    color: #173e70;
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.cards-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
+.loading {
+    grid-column: 1 / -1;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* ==========================================
+   CARD COMPONENTS
+   These selectors support common card markup.
+   ========================================== */
+
+.card-item {
+    width: 100%;
+    min-width: 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.bank-card,
+.debit-card,
+.credit-card,
+.card-visual {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: 250px;
+    padding: 24px 26px;
+    overflow: hidden;
+    border-radius: 15px;
+    color: white;
+    background:
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.17), transparent 34%),
+        linear-gradient(125deg, #082e68 0%, #0756a9 55%, #168bd0 100%);
+    box-shadow: 0 10px 24px rgba(8, 48, 100, .2);
+}
+
+.bank-card::before,
+.debit-card::before,
+.credit-card::before,
+.card-visual::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 220px;
+    height: 220px;
+    right: -100px;
+    bottom: -145px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 20px rgba(255,255,255,.035),
+        0 0 0 42px rgba(255,255,255,.025);
+}
+
+.card-top,
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.bank-name,
+.card-bank-name {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.card-type,
+.card-category {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #d9eaff;
+}
+
+.card-chip {
+    width: 43px;
+    height: 33px;
+    margin-top: 24px;
+    position: relative;
+    border-radius: 7px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff0a6, #d5ad4d, #f7df91);
+    border: 1px solid rgba(255,255,255,.55);
+}
+
+.card-chip::before,
+.card-chip::after {
+    content: "";
+    position: absolute;
+    background: rgba(125,89,22,.5);
+}
+
+.card-chip::before {
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 1px;
+}
+
+.card-chip::after {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+}
+
+.card-number,
+.card-number-display {
+    margin-top: 21px;
+    font-family: "Courier New", monospace;
+    font-size: clamp(17px, 1.7vw, 22px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.card-number-actions {
+    margin-top: 7px;
+}
+
+.show-number-btn,
+.toggle-number-btn {
+    background: transparent;
+    border: none;
+    color: #dcecff;
+    padding: 3px 0;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.show-number-btn:disabled,
+.toggle-number-btn:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.card-bottom,
+.card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.cardholder-section,
+.cardholder-info {
+    min-width: 0;
+}
+
+.card-label {
+    display: block;
+    color: #c3dcf8;
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    margin-bottom: 5px;
+}
+
+.cardholder-name,
+.cardholder-info strong {
+    display: block;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+.card-expiry {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.card-expiry strong {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   CARD STATUS AND ACTIONS
+   ========================================== */
+
+.card-management,
+.card-controls,
+.card-status-section {
+    padding: 15px 18px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+.card-status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.status-label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status-badge.active,
+.status-active {
+    background: #e1f6e9;
+    color: #087443;
+}
+
+.status-badge.blocked,
+.status-blocked {
+    background: #ffe7e7;
+    color: #bd2636;
+}
+
+.card-actions {
+    display: flex;
+    gap: 9px;
+    margin-top: 13px;
+}
+
+.block-btn,
+.activate-btn {
+    border: none;
+    border-radius: 7px;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.block-btn {
+    color: #c62828;
+    background: #fff0f0;
+}
+
+.activate-btn {
+    color: #087443;
+    background: #e1f8eb;
+}
+
+.block-btn:hover {
+    background: #ffdddd;
+}
+
+.activate-btn:hover {
+    background: #c9f1da;
+}
+
+/* Generic card buttons, without affecting other page buttons */
+.card-item button {
+    font-family: inherit;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+    padding: 18px 30px;
+    background: white;
+    border-top: 1px solid var(--border);
+    color: #8493a6;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1100px) {
+    .content {
+        padding: 25px 22px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 215px;
+        min-width: 215px;
+    }
+
+    .main-area {
+        width: calc(100% - 215px);
+        margin-left: 215px;
+    }
+
+    .topbar {
+        padding: 20px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cards-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .sidebar {
+        width: 68px;
+        min-width: 68px;
+        padding: 20px 7px;
+    }
+
+    .brand {
+        font-size: 0;
+        padding: 0;
+    }
+
+    .brand span {
+        font-size: 0;
+    }
+
+    .nav-label,
+    .nav-link:not(.services-toggle) {
+        font-size: 0;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 12px 5px;
+    }
+
+    .nav-icon {
+        font-size: 18px;
+    }
+
+    .services-toggle span:not(.nav-icon):not(.services-arrow) {
+        display: none;
+    }
+
+    .services-submenu {
+        display: none;
+    }
+
+    .main-area {
+        width: calc(100% - 68px);
+        margin-left: 68px;
+    }
+
+    .topbar {
+        min-height: 80px;
+        padding: 15px;
+    }
+
+    .topbar h1 {
+        font-size: 20px;
+    }
+
+    .profile-chip span {
+        display: none;
+    }
+
+    .content {
+        padding: 20px 14px;
+    }
+
+    .button-group {
+        width: 100%;
+    }
+
+    .button-group button {
+        flex: 1;
+        padding: 9px 8px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    .bank-card,
+    .debit-card,
+    .credit-card,
+    .card-visual {
+        min-height: 225px;
+        padding: 19px;
+    }
+
+    .card-number,
+    .card-number-display {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+}
+
+/* ==========================================
+   CARD STATUS DESIGN
+========================================== */
+
+.card-management {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 17px 22px;
+    background: #ffffff;
+    border: 1px solid #e3eaf2;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 6px 18px rgba(22, 50, 85, 0.06);
+}
+
+/* Status text */
+
+.status-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 13px;
+    border-radius: 20px;
+}
+
+/* Active status */
+
+.status-text.active {
+    color: #087443;
+    background: #e5f8ed;
+}
+
+.status-text.active::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #16a765;
+    border-radius: 50%;
+}
+
+/* Blocked status */
+
+.status-text.blocked {
+    color: #c62828;
+    background: #fff0f0;
+}
+
+.status-text.blocked::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #dc3545;
+    border-radius: 50%;
+}
+
+/* Block / Activate buttons */
+
+.card-action-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 17px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Block card */
+
+.block-card-btn {
+    color: #c62828;
+    background: #fff0f0;
+    border: 1px solid #ffd5d5;
+}
+
+.block-card-btn:hover {
+    background: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Activate card */
+
+.activate-card-btn {
+    color: #087443;
+    background: #e5f8ed;
+    border: 1px solid #c4ecd3;
+}
+
+.activate-card-btn:hover {
+    background: #159957;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Card number */
+
+.card-number {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    margin: 25px 0 8px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .card-management {
+        flex-wrap: wrap;
+        padding: 14px;
+    }
+
+    .card-action-btn {
+        flex: 1;
+    }
+}
+/* Message notifications */
+.message {
+    display: none;
+    padding: 13px 18px;
+    margin: 15px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.message.error,
+.message.success {
+    display: block;
+}
+
+.message.error {
+    color: #b42318;
+    background: #feeceb;
+    border: 1px solid #f5c2c0;
+}
+
+.message.success {
+    color: #067647;
+    background: #ecfdf3;
+    border: 1px solid #abefc6;
+}
+
+/* Empty cards message */
+.empty-state {
+    padding: 30px 25px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    color: #334155;
+}
+
+.empty-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.empty-state h3 {
+    font-size: 21px;
+    color: #173b68;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 15px;
+    color: #64748b;
+    margin: 8px 0;
+}
+
+/* Add card panel */
+.add-card-panel {
+    display: none;
+    background: #ffffff;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 14px;
+    border: 1px solid #dbe4f0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.add-card-panel.show {
+    display: block;
+}
+/* =====================================
+   CENTER ALIGNMENT
+===================================== */
+
+/* Center linked cards section */
+.cards-section {
+    text-align: center;
+}
+
+/* Center cards grid */
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Center empty state */
+.empty-state {
+    width: 100%;
+    max-width: 650px;
+    min-height: 220px;
+    margin: 0 auto;
+    padding: 35px 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Center loading and error messages */
+.loading {
+    width: 100%;
+    text-align: center;
+    padding: 35px;
+}
+
+/* Center notification messages */
+.message {
+    width: 100%;
+    max-width: 650px;
+    margin: 20px auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Keep individual cards centered */
+.card-item {
+    margin: 0 auto;
+}
+
+/* Center add-card form */
+.add-card-panel {
+    width: 100%;
+    max-width: 850px;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+/* Card internal structure */
+
+/* COMPACT BANK CARD */
+
+.bank-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    min-height: 235px;
+    padding: 22px 26px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+    border-radius: 17px;
+    color: white;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bank-name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.card-chip {
+    width: 43px;
+    height: 32px;
+    border-radius: 7px;
+    margin-top: 12px;
+}
+
+.card-number {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: left;
+    margin-top: 8px;
+    white-space: nowrap;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: left;
+    margin-top: 14px;
+}
+
+.cardholder-label,
+.card-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.cardholder-name,
+.card-value {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.expiry-section {
+    text-align: right;
+}
+
+.card-management {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+}
+/* =====================================
+   FIX CARD CONTAINER WIDTH & ALIGNMENT
+===================================== */
+
+.cards-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 25px;
+}
+
+/* Compact white card container */
+.card-item {
+    width: 100%;
+    max-width: 470px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #dce5f0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(20, 50, 90, 0.08);
+}
+
+/* Blue bank card fills its parent */
+.bank-card {
+    width: 100%;
+    max-width: 100%;
+    min-height: 235px;
+    border-radius: 17px;
+    box-sizing: border-box;
+}
+
+/* Status section stays inside white container */
+.card-management {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+}
+
+/* Center the complete cards collection */
+.cards-section {
+    width: 100%;
+    text-align: center;
+}

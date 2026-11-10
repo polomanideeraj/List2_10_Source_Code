@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | FinAssist</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="app.js" defer></script>
+</head>
+<body data-page="admin">
+<div class="app-layout">
+    <aside class="sidebar">
+        <div class="brand">Fin<span>Assist</span></div>
+        <div class="nav-label">MAIN MENU</div>
+        <nav>
+            <a class="nav-link" href="dashboard.html"><span class="nav-icon">⌂</span> Dashboard</a>
+            <a class="nav-link" href="chatbot.html"><span class="nav-icon">✦</span> AI Assistant</a>
+            <a class="nav-link" href="complaints.html"><span class="nav-icon">▤</span> Complaints</a>
+            <a class="nav-link active" href="admin.html"><span class="nav-icon">⚙</span> Admin Panel</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a class="nav-link" href="#" data-logout><span class="nav-icon">↪</span> Log Out</a>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p>Review  customer support requests</p>
+            </div>
+            <div class="profile-chip">
+                <div class="avatar">A</div>
+                <span>Project Admin</span>
+            </div>
+        </header>
+
+        
+
+            <section class="admin-grid">
+                <article class="admin-stat">
+                    <span class="stat-label">Total complaints</span>
+                    <strong id="adminTotal">0</strong>
+                </article>
+                <article class="admin-stat">
+                    <span class="stat-label">Open</span>
+                    <strong id="adminOpen">0</strong>
+                </article>
+                <article class="admin-stat">
+                    <span class="stat-label">In progress</span>
+                    <strong id="adminProgress">0</strong>
+                </article>
+                <article class="admin-stat">
+                    <span class="stat-label">Resolved</span>
+                    <strong id="adminResolved">0</strong>
+                </article>
+            </section>
+
+            <section class="panel" style="margin-top:22px">
+                <h2>Customer complaints</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reference</th>
+                                <th>Customer</th>
+                                <th>Subject</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Update</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminComplaintBody"></tbody>
+                    </table>
+                </div>
+                <div class="empty-state" id="adminEmpty">No complaints have been submitted.</div>
+            </section>
+        </div>
+    </main>
+</div>
+</body>
+</html>

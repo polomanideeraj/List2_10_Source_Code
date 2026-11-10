@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Services | FinAssist</title>
+    <link rel="stylesheet" href="./app.css">
+
+    <style>
+        /* =====================================
+           LOAN SERVICES GRID
+        ===================================== */
+
+        .loan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+            align-items: stretch;
+        }
+
+        /* =====================================
+           LOAN CARDS
+        ===================================== */
+
+        .loan-card {
+            box-sizing: border-box;
+            width: 100%;
+            min-width: 0;
+            min-height: 350px;
+            background: white;
+            padding: 26px;
+            border-radius: 16px;
+            border: 1px solid #e5eaf2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        /* =====================================
+           LOAN ICON
+        ===================================== */
+
+        .loan-icon {
+            width: 100%;
+            height: 65px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            background: #e5f7ef;
+            border-radius: 8px;
+            font-size: 34px;
+            margin-bottom: 16px;
+        }
+
+        /* =====================================
+           LOAN TITLE
+        ===================================== */
+
+        .loan-card h3 {
+            margin: 4px 0 14px;
+            color: #1d3557;
+            font-size: 20px;
+            line-height: 1.4;
+        }
+
+        /* =====================================
+           LOAN DESCRIPTION
+        ===================================== */
+
+        .loan-card p {
+            color: #667085;
+            line-height: 1.6;
+            font-size: 15px;
+            margin: 0 0 22px;
+        }
+
+        /* =====================================
+           APPLY BUTTON
+        ===================================== */
+
+        .loan-card button,
+        .submit-btn {
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 52px;
+            padding: 12px;
+            background: #245bd6;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: auto;
+            transition: background 0.2s ease;
+        }
+
+        .loan-card button:hover,
+        .submit-btn:hover {
+            background: #1746a2;
+        }
+
+        .loan-card button:disabled,
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* =====================================
+           LOAN APPLICATION FORM
+        ===================================== */
+
+        .loan-form-panel {
+            display: none;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 650px;
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            border: 1px solid #e5eaf2;
+            margin: 35px auto;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+        }
+
+        .loan-form {
+            display: grid;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 7px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #344054;
+        }
+
+        .form-group input,
+        .form-group select {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #245bd6;
+            box-shadow: 0 0 0 3px rgba(36,91,214,0.1);
+        }
+
+        .loan-form .submit-btn {
+            margin-top: 5px;
+        }
+
+        .cancel-btn {
+            margin-top: 0;
+            padding: 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* =====================================
+           SUCCESS / ERROR MESSAGE
+        ===================================== */
+
+        .loan-message {
+            display: none;
+            margin-top: 18px;
+            padding: 14px;
+            background: #ecfdf3;
+            color: #067647;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .demo-note {
+            margin-top: 20px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        /* =====================================
+           LOAN SERVICES HEADER
+        ===================================== */
+
+        .app-layout .main-content header.topbar {
+            width: 100% !important;
+            min-height: 110px !important;
+            height: auto !important;
+            box-sizing: border-box !important;
+
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+
+            gap: 20px !important;
+            padding: 20px 32px !important;
+            margin: 0 !important;
+
+            background: #ffffff !important;
+            border-bottom: 1px solid #e5eaf2 !important;
+        }
+
+        .app-layout .main-content header.topbar > div:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-layout .main-content header.topbar h1 {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 32px !important;
+            line-height: 1.3 !important;
+            font-weight: 700 !important;
+            color: #173765 !important;
+        }
+
+        .app-layout .main-content header.topbar p {
+            display: block !important;
+            margin: 8px 0 0 !important;
+            padding: 0 !important;
+            font-size: 17px !important;
+            line-height: 1.5 !important;
+            color: #64748b !important;
+        }
+
+        .app-layout .main-content header.topbar .profile-info {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            flex: 0 0 auto;
+            gap: 12px !important;
+            margin: 0 0 0 auto !important;
+            padding: 0 !important;
+            white-space: nowrap;
+            color: #173765 !important;
+            font-size: 15px !important;
+        }
+
+        .app-layout .main-content header.topbar [data-avatar] {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e8efff;
+            color: #245bd6;
+        }
+
+        /* =====================================
+           TABLET
+        ===================================== */
+
+        @media (max-width: 1000px) {
+            .loan-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 20px;
+            }
+        }
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 600px) {
+            .loan-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                padding: 0 14px;
+                box-sizing: border-box;
+            }
+
+            .loan-card {
+                min-height: 320px;
+                padding: 22px;
+            }
+
+            .loan-form-panel {
+                padding: 20px;
+                margin: 25px auto;
+            }
+
+            .app-layout .main-content header.topbar {
+                min-height: 95px !important;
+                padding: 16px !important;
+                gap: 10px !important;
+            }
+
+            .app-layout .main-content header.topbar h1 {
+                font-size: 24px !important;
+            }
+
+            .app-layout .main-content header.topbar p {
+                font-size: 13px !important;
+            }
+
+            .app-layout .main-content header.topbar .profile-info {
+                font-size: 12px !important;
+                gap: 8px !important;
+            }
+
+            .app-layout .main-content header.topbar [data-avatar] {
+                width: 32px;
+                height: 32px;
+                min-width: 32px;
+            }
+        }
+    </style>
+
+    <script src="./app.js" defer></script>
+</head>
+
+<body data-page="loans">
+
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <div class="brand">Fin<span>Assist</span></div>
+
+            <div class="nav-label">MAIN MENU</div>
+
+            <nav>
+                <a class="nav-link" href="dashboard.html">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <button
+                    class="nav-link services-toggle"
+                    id="servicesToggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="servicesSubmenu"
+                >
+                    <span class="nav-icon">▦</span>
+                    <span>Services</span>
+                    <span class="services-arrow" id="servicesArrow">⌄</span>
+                </button>
+
+                <div class="services-submenu" id="servicesSubmenu" hidden>
+                    <a class="nav-link" href="accounts.html">My Accounts</a>
+                    <a class="nav-link" href="transactions.html">Transactions</a>
+                    <a class="nav-link" href="cards.html">My Cards</a>
+                    <a class="nav-link active" href="loans.html">Loan Applications</a>
+                    <a class="nav-link" href="applications.html">My Applications</a>
+                    <a class="nav-link" href="complaints.html">Customer Support</a>
+                </div>
+
+                <a class="nav-link" href="emi-calculator.html">
+                    <span class="nav-icon">%</span>
+                    <span>EMI Calculator</span>
+                </a>
+
+                <a class="nav-link" href="chatbot.html">
+                    <span class="nav-icon">✦</span>
+                    AI Assistant
+                </a>
+            </nav>
+
+            <div class="sidebar-top">
+                <a class="nav-link" href="#" data-logout>
+                    <span class="nav-icon">↪</span>Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <h1>Loan Services</h1>
+                    <p>Choose a loan that suits your needs.</p>
+                </div>
+
+                <div class="profile-info">
+                    <span data-customer-name>Customer</span>
+                    <span data-avatar>👤</span>
+                </div>
+            </header>
+
+            <section class="loan-grid">
+
+                <article class="loan-card">
+                    <div class="loan-icon">💳</div>
+                    <h3>Personal Loan</h3>
+                    <p>For personal expenses, emergencies, travel, and other needs.</p>
+                    <button type="button" data-loan="Personal Loan">Apply Now</button>
+                </article>
+
+                <article class="loan-card">
+                    <div class="loan-icon">🪙</div>
+                    <h3>Gold Loan</h3>
+                    <p>Apply for a loan against eligible gold jewellery.</p>
+                    <button type="button" data-loan="Gold Loan">Apply Now</button>
+                </article>
+
+                <article class="loan-card">
+                    <div class="loan-icon">🚗</div>
+                    <h3>Vehicle Loan</h3>
+                    <p>Explore financing options for a car or two-wheeler.</p>
+                    <button type="button" data-loan="Vehicle Loan">Apply Now</button>
+                </article>
+
+                <article class="loan-card">
+                    <div class="loan-icon">🏠</div>
+                    <h3>Home Loan</h3>
+                    <p>For purchasing, constructing, or renovating a home.</p>
+                    <button type="button" data-loan="Home Loan">Apply Now</button>
+                </article>
+
+                <article class="loan-card">
+                    <div class="loan-icon">🏢</div>
+                    <h3>Loan Against Property (LAP)</h3>
+                    <p>Explore borrowing against eligible property.</p>
+                    <button type="button" data-loan="Loan Against Property (LAP)">Apply Now</button>
+                </article>
+
+                <article class="loan-card">
+                    <div class="loan-icon">🎓</div>
+                    <h3>Education Loan</h3>
+                    <p>For eligible education expenses and higher studies.</p>
+                    <button type="button" data-loan="Education Loan">Apply Now</button>
+                </article>
+
+            </section>
+
+            <section class="loan-form-panel" id="loanFormPanel">
+                <h2 id="selectedLoanTitle">Apply for a Loan</h2>
+                <p>Enter your details to create a sample application.</p>
+
+                <form class="loan-form" id="loanForm">
+                    <input type="hidden" id="loanType" name="loanType">
+
+                    <div class="form-group">
+                        <label for="applicantName">Full Name</label>
+                        <input
+                            id="applicantName"
+                            name="applicantName"
+                            type="text"
+                            required
+                            maxlength="100"
+                            placeholder="Enter your full name"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanAmount">Loan Amount (₹)</label>
+                        <input
+                            id="loanAmount"
+                            name="loanAmount"
+                            type="number"
+                            min="1000"
+                            max="1000000000"
+                            required
+                            placeholder="Enter Required amount"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanTenure">Loan Tenure</label>
+                        <select id="loanTenure" name="loanTenure" required>
+                            <option value="">Select tenure</option>
+                            <option value="12 months">12 months/1 year</option>
+                            <option value="24 months">24 months/2 years</option>
+                            <option value="36 months">36 months/3 years</option>
+                            <option value="48 months">48 months/4 years</option>
+                            <option value="60 months">60 months/5 years</option>
+                            <option value="120 months">120 months/10 years</option>
+                            <option value="240 months">240 months/20 years</option>
+                            <option value="360 months">360 months/30 years</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Submit Application
+                    </button>
+
+                    <button type="button" class="cancel-btn" id="cancelLoan">
+                        Cancel
+                    </button>
+                </form>
+
+                <div class="loan-message" id="loanMessage" role="status"></div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        const loanFormPanel = document.getElementById("loanFormPanel");
+        const loanForm = document.getElementById("loanForm");
+        const loanTypeInput = document.getElementById("loanType");
+        const loanMessage = document.getElementById("loanMessage");
+        const submitButton = loanForm.querySelector(".submit-btn");
+
+        document.querySelectorAll("[data-loan]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const type = button.dataset.loan;
+
+                loanTypeInput.value = type;
+                document.getElementById("selectedLoanTitle").textContent =
+                    "Apply for " + type;
+
+                loanMessage.style.display = "none";
+                loanFormPanel.style.display = "block";
+                loanFormPanel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            });
+        });
+
+        document.getElementById("cancelLoan").addEventListener("click", function () {
+            loanForm.reset();
+            loanFormPanel.style.display = "none";
+            loanMessage.style.display = "none";
+        });
+
+        loanForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const loanType = loanTypeInput.value.trim();
+            const amount = Number(
+                document.getElementById("loanAmount").value
+            );
+            const tenureValue = document.getElementById("loanTenure").value;
+            const tenureMonths = parseInt(tenureValue, 10);
+            const applicantName =
+                document.getElementById("applicantName").value.trim();
+
+            if (!applicantName || !loanType || amount < 1000 ||
+                !Number.isFinite(amount) || !tenureMonths) {
+                loanMessage.textContent = "Please enter valid loan details.";
+                loanMessage.style.display = "block";
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting...";
+            loanMessage.style.display = "none";
+
+            try {
+                const response = await fetch("/api/apply-loan", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        loan_type: loanType,
+                        amount: amount,
+                        tenure_months: tenureMonths
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message || "Unable to submit your application."
+                    );
+                }
+
+                loanMessage.textContent =
+                    "Application submitted successfully! Reference: " +
+                    result.application_id +
+                    ". Status: " + result.status;
+
+                loanMessage.style.display = "block";
+                loanForm.reset();
+
+            } catch (error) {
+                loanMessage.textContent = error.message ||
+                    "Something went wrong. Please try again.";
+                loanMessage.style.display = "block";
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Application";
+            }
+        });
+    </script>
+
+</body>
+</html>

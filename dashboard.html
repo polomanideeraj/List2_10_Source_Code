@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | FinAssist</title>
+    <link rel="stylesheet" href="./app.css">
+    <script src="./app.js" defer></script>
+</head>
+
+<body data-page="dashboard">
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">Fin<span>Assist</span></div>
+        <div class="nav-label">MAIN MENU</div>
+
+        <nav>
+            <a class="nav-link active" href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <button class="nav-link services-toggle"
+                    id="servicesToggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="servicesSubmenu">
+                <span class="nav-icon">▦</span>
+                <span>Services</span>
+                <span class="services-arrow" id="servicesArrow">⌄</span>
+            </button>
+
+           
+<div class="services-submenu" id="servicesSubmenu" hidden>
+  <a class="nav-link" href="accounts.html">My Accounts</a>
+  <a class="nav-link" href="transactions.html">Transactions</a>
+  <a class="nav-link" href="cards.html">My Cards</a>
+  <a class="nav-link" href="loans.html">Loan Applications</a>
+  <a class="nav-link" href="applications.html">My Applications</a>
+  <a class="nav-link" href="complaints.html">Customer Support</a>
+</div>
+
+
+            <a class="nav-link" href="emi-calculator.html">
+                <span class="nav-icon">％</span>
+                EMI Calculator
+            </a>
+            <a class="nav-link" href="chatbot.html">
+    <span class="nav-icon">✦</span>
+    AI Assistant
+</a>
+        </nav>
+
+        <div class="sidebar-top">
+            <a class="nav-link" href="#" data-logout>
+                <span class="nav-icon">↪</span>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-area">
+
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Your personal banking overview</p>
+            </div>
+
+            <div class="profile-chip">
+                <div class="avatar" data-avatar>U</div>
+                <span data-customer-name>Customer</span>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <section class="welcome-banner">
+                <div>
+                    <h2 id="welcomeTitle">Welcome back!</h2>
+                    <p>Manage your banking services from one place.</p>
+                </div>
+            </section>
+
+            <div id="dashboardMessage"
+                 role="status"
+                 style="display:none; padding:12px; margin-bottom:16px; border-radius:8px;">
+            </div>
+
+            <section class="dashboard-services-grid">
+
+                <article class="dashboard-service-card balance-dashboard-card">
+                    <div class="dashboard-service-icon">₹</div>
+                    <h3>Account Balance</h3>
+
+                    <div class="balance-amount-row">
+                        <h2 id="accountBalance">Loading...</h2>
+
+                        <button type="button"
+                                class="balance-toggle"
+                                id="balanceToggle"
+                                aria-label="Hide account balance"
+                                aria-pressed="false"
+                                title="Hide balance">👁</button>
+                    </div>
+
+                    <p>Account Number: <span id="accountNumber">Loading...</span></p>
+                    <a href="accounts.html">Manage accounts →</a>
+                </article>
+
+                <a class="dashboard-service-card" href="accounts.html">
+                    <div class="dashboard-service-icon">▤</div>
+                    <h3>My Accounts</h3>
+                    <p>View and manage your bank accounts.</p>
+                    <span>Manage accounts →</span>
+                </a>
+
+                <a class="dashboard-service-card" href="transactions.html">
+                    <div class="dashboard-service-icon">⇄</div>
+                    <h3>Transactions</h3>
+                    <p>Check your recent transaction history.</p>
+                    <span>View transactions →</span>
+                </a>
+
+                <a class="dashboard-service-card" href="cards.html">
+                    <div class="dashboard-service-icon">▣</div>
+                    <h3>My Cards</h3>
+                    <p>View your cards and card information.</p>
+                    <span>View cards →</span>
+                </a>
+
+                <a class="dashboard-service-card" href="loans.html">
+                    <div class="dashboard-service-icon">₹</div>
+                    <h3>Loan Application</h3>
+                    <p>Explore loan options and apply.</p>
+                    <span>Apply for a loan →</span>
+                </a>
+
+                <a class="dashboard-service-card ai-service-card" href="chatbot.html">
+                    <div class="dashboard-service-icon">✦</div>
+                    <h3>AI Assistant</h3>
+                    <p>Get answers to your banking questions.</p>
+                    <span>Chat with AI →</span>
+                </a>
+
+            </section>
+
+            
+
+        </div>
+
+        <footer class="footer-note">
+            FinAssist · AI-Assisted Smart Banking Services
+        </footer>
+
+    </main>
+</div>
+
+<script>
+"use strict";
+
+let balanceVisible = true;
+let actualBalance = 0;
+
+const balanceToggle = document.getElementById("balanceToggle");
+const accountBalance = document.getElementById("accountBalance");
+const accountNumber = document.getElementById("accountNumber");
+const dashboardMessage = document.getElementById("dashboardMessage");
+
+function showDashboardMessage(message, isError = false) {
+    dashboardMessage.textContent = message;
+    dashboardMessage.style.display = "block";
+    dashboardMessage.style.background = isError ? "#fee2e2" : "#d1fae5";
+    dashboardMessage.style.color = isError ? "#991b1b" : "#065f46";
+}
+
+function formatCurrency(amount) {
+    return Number(amount || 0).toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 2
+    });
+}
+
+function updateBalanceDisplay() {
+    accountBalance.textContent = balanceVisible
+        ? formatCurrency(actualBalance)
+        : "₹ ••••••";
+
+    balanceToggle.textContent = balanceVisible ? "👁" : "◉";
+    balanceToggle.title = balanceVisible ? "Hide balance" : "Show balance";
+    balanceToggle.setAttribute("aria-label",
+        balanceVisible ? "Hide account balance" : "Show account balance");
+    balanceToggle.setAttribute("aria-pressed", String(!balanceVisible));
+}
+
+if (balanceToggle) {
+    balanceToggle.addEventListener("click", function () {
+        balanceVisible = !balanceVisible;
+        updateBalanceDisplay();
+    });
+}
+
+async function loadDashboard() {
+    try {
+        // Check the Flask session first.
+        const sessionResponse = await fetch("/api/session", {
+            credentials: "same-origin"
+        });
+
+        if (sessionResponse.status === 401) {
+            window.location.replace("/login.html");
+            return;
+        }
+
+        if (!sessionResponse.ok) {
+            throw new Error("Could not verify your login session.");
+        }
+
+        const sessionData = await sessionResponse.json();
+
+        if (!sessionData.authenticated ||
+            sessionData.role !== "customer") {
+            window.location.replace("/login.html");
+            return;
+        }
+
+        const customerName = sessionData.customer_name || "Customer";
+
+        document.querySelectorAll("[data-customer-name]").forEach(element => {
+            element.textContent = customerName;
+        });
+
+        document.querySelectorAll("[data-avatar]").forEach(element => {
+            element.textContent = customerName.charAt(0).toUpperCase();
+        });
+
+        document.getElementById("welcomeTitle").textContent =
+            "Welcome back, " + customerName + "!";
+
+        sessionStorage.setItem("userRole", "customer");
+        sessionStorage.setItem("customerId", sessionData.customer_id || "");
+        sessionStorage.setItem("customerName", customerName);
+
+        // Load the customer's accounts from Flask.
+        const accountsResponse = await fetch("/api/my-accounts", {
+            credentials: "same-origin"
+        });
+
+        if (!accountsResponse.ok) {
+            throw new Error("Your session is active, but accounts could not be loaded.");
+        }
+
+        const accountsData = await accountsResponse.json();
+
+        // Accept either an array or an object containing accounts.
+        const accounts = Array.isArray(accountsData)
+            ? accountsData
+            : (accountsData.accounts || []);
+
+        if (accounts.length > 0) {
+            actualBalance = accounts.reduce(
+                (total, account) => total + Number(account.balance || 0),
+                0
+            );
+
+            accountNumber.textContent =
+                accounts[0].account_number || "Not available";
+        } else {
+            actualBalance = 0;
+            accountNumber.textContent = "No account found";
+        }
+
+        updateBalanceDisplay();
+
+    } catch (error) {
+        console.error("Dashboard loading error:", error);
+        showDashboardMessage(
+            error.message || "Could not load dashboard information.",
+            true
+        );
+    }
+}
+
+loadDashboard();
+</script>
+
+</body>
+</html>

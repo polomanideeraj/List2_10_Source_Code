@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMI Calculator | FinAssist</title>
+  <link rel="stylesheet" href="./app.css">
+
+  <style>
+    .emi-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .emi-panel,
+    .emi-result {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    }
+
+    .emi-form {
+      display: grid;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #344054;
+    }
+
+    .form-group input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .emi-form button {
+      padding: 12px;
+      background: #245bd6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .emi-form button:hover {
+      background: #1746a2;
+    }
+
+    .result-item {
+      padding: 16px 0;
+      border-bottom: 1px solid #e8edf3;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-label {
+      color: #667085;
+      font-size: 14px;
+    }
+
+    .result-value {
+      display: block;
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #245bd6;
+      overflow-wrap: anywhere;
+    }
+
+    .demo-note {
+      margin-top: 20px;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .emi-panel,
+      .emi-result {
+        padding: 18px;
+      }
+    }
+  </style>
+
+  <script src="./app.js" defer></script>
+</head>
+
+<body data-page="emi-calculator">
+  <div class="app-layout">
+  
+<aside class="sidebar">
+  <div class="brand">Fin<span>Assist</span></div>
+
+  <div class="nav-label">MAIN MENU</div>
+
+  <nav>
+    <a class="nav-link" href="dashboard.html">
+      <span class="nav-icon">⌂</span>
+      <span>Dashboard</span>
+    </a>
+
+    <button
+      class="nav-link services-toggle"
+      id="servicesToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="servicesSubmenu"
+    >
+      <span class="nav-icon">▦</span>
+      <span>Services</span>
+      <span class="services-arrow" id="servicesArrow">⌄</span>
+    </button>
+
+    <div class="services-submenu" id="servicesSubmenu" hidden>
+      <a class="nav-link" href="accounts.html">My Accounts</a>
+      <a class="nav-link" href="transactions.html">Transactions</a>
+      <a class="nav-link" href="cards.html">My Cards</a>
+      <a class="nav-link" href="loans.html">Loan Applications</a>
+      <a class="nav-link" href="applications.html">My Applications</a>
+      <a class="nav-link" href="complaints.html">Customer Support</a>
+    </div>
+
+    <a class="nav-link active" href="emi-calculator.html">
+      <span class="nav-icon">%</span>
+      <span>EMI Calculator</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <a class="nav-link" href="#" data-logout>Logout</a>
+  </div>
+</aside>
+
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>EMI Calculator</h1>
+          <p>Calculate your estimated monthly loan payment.</p>
+        </div>
+
+        <div class="profile-info">
+          <span data-customer-name>Customer</span>
+          <span data-avatar>👤</span>
+        </div>
+      </header>
+
+      <section class="emi-container">
+        <div class="emi-panel">
+          <h2>Loan Details</h2>
+
+          <form class="emi-form" id="emiForm">
+            <div class="form-group">
+              <label for="principal">Loan Amount (₹)</label>
+              <input type="number" id="principal" min="1000"
+                     max="100000000" value="500000" required>
+            </div>
+
+            <div class="form-group">
+              <label for="interest">Annual Interest Rate (%)</label>
+              <input type="number" id="interest" min="0"
+                     max="100" step="0.1" value="9" required>
+            </div>
+
+            <div class="form-group">
+              <label for="tenure">Loan Tenure (Years)</label>
+              <input type="number" id="tenure" min="1"
+                     max="40" value="5" required>
+            </div>
+
+            <button type="submit">Calculate EMI</button>
+          </form>
+        </div>
+
+        <div class="emi-result">
+          <h2>Calculation Results</h2>
+
+          <div class="result-item">
+            <span class="result-label">Monthly EMI</span>
+            <strong class="result-value" id="monthlyEmi">₹0</strong>
+          </div>
+
+          <div class="result-item">
+            <span class="result-label">Total Interest</span>
+            <strong class="result-value" id="totalInterest">₹0</strong>
+          </div>
+
+          <div class="result-item">
+            <span class="result-label">Total Repayment</span>
+            <strong class="result-value" id="totalPayment">₹0</strong>
+          </div>
+        </div>
+      </section>
+
+      
+    </main>
+  </div>
+
+  <script>
+    const emiForm = document.getElementById("emiForm");
+
+    function formatRupees(amount) {
+      return "₹" + amount.toLocaleString("en-IN", {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2
+      });
+    }
+
+    function calculateEMI(event) {
+      if (event) event.preventDefault();
+
+      const principal = Number(document.getElementById("principal").value);
+      const annualRate = Number(document.getElementById("interest").value);
+      const years = Number(document.getElementById("tenure").value);
+
+      if (
+        !Number.isFinite(principal) ||
+        !Number.isFinite(annualRate) ||
+        !Number.isFinite(years) ||
+        principal < 1000 ||
+        principal > 100000000 ||
+        annualRate < 0 ||
+        annualRate > 100 ||
+        years < 1 ||
+        years > 40
+      ) {
+        return;
+      }
+
+      const months = years * 12;
+      const monthlyRate = annualRate / 12 / 100;
+
+      let emi;
+
+      if (monthlyRate === 0) {
+        emi = principal / months;
+      } else {
+        const factor = Math.pow(1 + monthlyRate, months);
+        emi = principal * monthlyRate * factor / (factor - 1);
+      }
+
+      const totalPayment = emi * months;
+      const totalInterest = totalPayment - principal;
+
+      document.getElementById("monthlyEmi").textContent =
+        formatRupees(emi);
+
+      document.getElementById("totalInterest").textContent =
+        formatRupees(totalInterest);
+
+      document.getElementById("totalPayment").textContent =
+        formatRupees(totalPayment);
+    }
+
+    emiForm.addEventListener("submit", calculateEMI);
+    calculateEMI();
+  </script>
+</body>
+</html>

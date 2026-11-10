@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal | FinAssist</title>
+    <link rel="stylesheet" href="employee.css">
+    <script src="employee.js" defer></script>
+</head>
+<body>
+
+<header class="employee-header">
+    <div class="brand">Fin<span>Assist</span></div>
+
+    <div class="header-right">
+        <span class="employee-id" id="employeeId">Employee ID: NOB12</span>
+        <button id="logoutBtn" class="logout-btn">Log Out</button>
+    </div>
+</header>
+
+<main class="dashboard-container">
+
+    <section class="page-heading">
+        <h1>Employee Dashboard</h1>
+        <p>Search customer records, view banking information, and manage complaints.</p>
+    </section>
+
+    <div id="messageBox" class="message" hidden></div>
+
+    
+
+    <!-- Customer Search -->
+    <section class="panel search-panel">
+        <h3>Search Customer ID</h3>
+
+        <div class="search-row">
+            <input
+                type="text"
+                id="customerSearch"
+                placeholder="Enter Customer ID (e.g. CUS001)"
+            >
+            <button id="searchCustomerBtn">Search</button>
+        </div>
+    </section>
+
+    <!-- Customer Information -->
+    <section id="customerDetails" class="customer-section" hidden>
+
+        <div class="customer-heading">
+            <div>
+                <h2 id="customerName">Customer Name</h2>
+                <p id="customerId">Customer ID</p>
+            </div>
+        </div>
+
+        <div class="customer-grid">
+
+            <button class="customer-option" data-section="accounts">
+                <span class="option-icon">🏦</span>
+                <span>Customer Accounts</span>
+            </button>
+
+            <button class="customer-option" data-section="balance">
+                <span class="option-icon">💰</span>
+                <span>Customer Balance</span>
+            </button>
+
+            <button class="customer-option" data-section="transactions">
+                <span class="option-icon">↔</span>
+                <span>Customer Transactions</span>
+            </button>
+
+            <button class="customer-option" data-section="cards">
+                <span class="option-icon">💳</span>
+                <span>Customer Cards</span>
+            </button>
+
+            <button class="customer-option" data-section="loans">
+                <span class="option-icon">📄</span>
+                <span>Customer Loans</span>
+            </button>
+
+            <button class="customer-option" data-section="complaints">
+                <span class="option-icon">💬</span>
+                <span>Customer Complaints</span>
+            </button>
+
+        </div>
+
+        <div id="customerInfoPanel" class="customer-info-panel" hidden>
+            <div class="info-panel-heading">
+                <h3 id="infoPanelTitle">Customer Information</h3>
+                <button id="closeInfoPanel" type="button">Close</button>
+            </div>
+            <div id="customerInfoContent"></div>
+        </div>
+
+    </section>
+
+    <!-- All Customer Complaints -->
+    <section class="panel data-panel">
+        <h2>All Customer Complaints</h2>
+
+        <div class="filter-row">
+            <input type="text" id="complaintSearch"
+                   placeholder="Search complaint ID or customer ID">
+
+            <select id="complaintStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Complaint ID</th>
+                        <th>Customer ID</th>
+                        <th>Customer</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody id="complaintsTableBody">
+                    <tr><td colspan="7" class="empty-state">Loading complaints...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Loan Approval -->
+    <section class="panel data-panel">
+        <h2>Loan Approval</h2>
+
+        <div class="filter-row">
+            <input type="text" id="loanSearch"
+                   placeholder="Search by LRN, customer ID or name">
+
+            <select id="loanStatusFilter">
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Documents Required">Documents Required</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>LRN</th>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Loan Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody id="loansTableBody">
+                    <tr><td colspan="7" class="empty-state">Loading loan applications...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="footer">
+        FinAssist - Smart Banking Services
+    </footer>
+
+</main>
+
+</body>
+</html>

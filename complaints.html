@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints & Support | FinAssist</title>
+    <link rel="stylesheet" href="./app.css">
+    <script src="./app.js" defer></script>
+</head>
+
+<body data-page="complaints">
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">Fin<span>Assist</span></div>
+        <div class="nav-label">MAIN MENU</div>
+
+        <nav>
+            <a class="nav-link" href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a class="nav-link" href="chatbot.html">
+                <span class="nav-icon">✦</span>
+                AI Assistant
+            </a>
+
+            <a class="nav-link active" href="complaints.html">
+                <span class="nav-icon">▤</span>
+                Complaints
+            </a>
+        </nav>
+
+        <div class="sidebar-top">
+            <a class="nav-link" href="#" data-logout>
+                <span class="nav-icon">↪</span>
+                Log Out
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-area">
+
+        <header class="topbar">
+            <div>
+                <h1>Complaints & Support</h1>
+                <p>Submit a request and track its progress</p>
+            </div>
+
+           <div class="profile-chip">
+    <div class="avatar" data-avatar></div>
+    <span data-customer-name></span>
+</div>
+        </header>
+
+        <div class="content">
+
+            <!-- Page introduction -->
+            <section class="welcome-banner">
+                <div>
+                    <h2>How can we help you?</h2>
+                    <p>Tell us about your issue and track your complaint below.</p>
+                </div>
+                <div class="banner-symbol">▤</div>
+            </section>
+
+            <!-- Complaint form -->
+            <section class="panel complaint-form-panel">
+                <h2>Submit a complaint</h2>
+                <p class="panel-description">
+                    Provide the details of your issue. Do not include your PIN,
+                    password, OTP, or full card number.
+                </p>
+
+                <form id="complaintForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label for="complaintCategory">
+                                Complaint category
+                            </label>
+
+                            <select id="complaintCategory" required>
+                                <option value="">Choose a category</option>
+                                <option>Card issue</option>
+                                <option>Failed transaction</option>
+                                <option>Account service</option>
+                                <option>Online banking</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="complaintPriority">Priority</label>
+
+                            <select id="complaintPriority" required>
+                                <option value="Normal">Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="complaintSubject">Subject</label>
+
+                            <input
+                                id="complaintSubject"
+                                type="text"
+                                maxlength="100"
+                                placeholder="Briefly describe your issue"
+                                required>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="complaintDescription">Description</label>
+
+                            <textarea
+                                id="complaintDescription"
+                                maxlength="1000"
+                                rows="5"
+                                placeholder="Explain what happened..."
+                                required></textarea>
+                        </div>
+
+                    </div>
+
+                    <button class="button" type="submit">
+                        Submit complaint →
+                    </button>
+
+                    <div
+                        id="complaintFeedback"
+                        class="feedback"
+                        role="status"
+                        aria-live="polite">
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Complaints history -->
+            <section class="panel complaints-history-panel">
+                <div class="section-title-row">
+                    <div>
+                        <h2>Your complaints</h2>
+                        <p class="panel-description">
+                            Review the complaints you have submitted.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reference ID</th>
+                                <th>Subject</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="complaintTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="empty-state" id="complaintEmpty">
+                    <div class="empty-state-icon">▤</div>
+                    <h3>No complaints yet</h3>
+                    <p>Your submitted complaints will appear here.</p>
+                </div>
+            </section>
+
+
+        </div>
+
+        <footer class="footer-note" align="center">
+            FinAssist · AI-Assisted Smart Banking Services
+        </footer>
+
+    </main>
+</div>
+</body>
+</html>

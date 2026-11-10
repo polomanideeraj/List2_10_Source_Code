@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cards | FinAssist</title>
+
+    <link rel="stylesheet" href="cards.css">
+    <script src="cards.js" defer></script>
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">Fin<span>Assist</span></div>
+
+        <div class="nav-label">MAIN MENU</div>
+
+        <nav>
+
+            <a class="nav-link" href="dashboard.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <button class="nav-link services-toggle"
+                    id="servicesToggle"
+                    type="button"
+                    aria-expanded="true">
+
+                <span class="nav-icon">▦</span>
+                <span>Services</span>
+                <span class="services-arrow" id="servicesArrow">⌄</span>
+
+            </button>
+
+            <div class="services-submenu" id="servicesSubmenu">
+
+                <a class="nav-link" href="accounts.html">My Accounts</a>
+                <a class="nav-link" href="transactions.html">Transactions</a>
+                <a class="nav-link active" href="cards.html">My Cards</a>
+                <a class="nav-link" href="loans.html">Loan Applications</a>
+                <a class="nav-link" href="applications.html">My Applications</a>
+                <a class="nav-link" href="complaints.html">Customer Support</a>
+
+            </div>
+
+            <a class="nav-link" href="emi-calculator.html">
+                <span class="nav-icon">％</span>
+                EMI Calculator
+            </a>
+<a class="nav-link" href="chatbot.html">
+    <span class="nav-icon">✦</span>
+    AI Assistant
+</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a class="nav-link" href="#" id="logoutBtn">
+                <span class="nav-icon">↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN AREA -->
+    <main class="main-area">
+
+        <header class="topbar">
+
+            <div>
+                <h1>My Cards</h1>
+                <p>Manage your banking cards</p>
+            </div>
+
+            <div class="profile-chip">
+
+                <div class="avatar" id="userAvatar">D</div>
+                <span id="customerName">Customer</span>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- PAGE HEADING -->
+            <section class="page-heading">
+
+                <div>
+                    <h2>My Cards</h2>
+                    <p>View and manage your linked banking cards.</p>
+                </div>
+
+                <div class="button-group">
+
+                    <button class="secondary-btn"
+                            type="button"
+                            id="refreshCardsBtn">
+                        ↻ Refresh
+                    </button>
+
+                    <button class="primary-btn"
+                            type="button"
+                            id="addCardBtn">
+                        + Add New Card
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- MESSAGE -->
+            <div id="messageBox"
+                 class="message"
+                 role="status"
+                 aria-live="polite"></div>
+
+
+            <!-- ADD CARD FORM -->
+            <section class="add-card-panel" id="addCardPanel">
+
+                <h3>Add a New Card</h3>
+
+                <p class="form-description">
+                    Enter your card details below. Your registered
+                    customer name will be filled automatically.
+                </p>
+
+                <form id="addCardForm" novalidate>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="cardholderName">
+                                Cardholder Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardholderName"
+                                readonly
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="linkedAccount">
+                                Linked Account Number
+                            </label>
+
+                            <select id="linkedAccount" required>
+                                <option value="">Loading accounts...</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="cardNumber">
+                                Card Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardNumber"
+                                maxlength="19"
+                                minlength="19"
+                                inputmode="numeric"
+                                autocomplete="off"
+                                placeholder="1234 5678 9012 3456"
+                                required
+                            >
+
+                            <small>Enter exactly 16 digits.</small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="cardType">
+                                Card Type
+                            </label>
+
+                            <select id="cardType" required>
+
+                                <option value="">Choose card type</option>
+                                <option value="Debit">Debit Card</option>
+                                <option value="Credit">Credit Card</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Expiry Date</label>
+
+                            <div class="expiry-inputs">
+
+                                <input
+                                    type="text"
+                                    id="expiryMonth"
+                                    maxlength="2"
+                                    inputmode="numeric"
+                                    placeholder="MM"
+                                    aria-label="Expiry month"
+                                    required
+                                >
+
+                                <input
+                                    type="text"
+                                    id="expiryYear"
+                                    maxlength="4"
+                                    inputmode="numeric"
+                                    placeholder="YYYY"
+                                    aria-label="Expiry year"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="cvv">CVV</label>
+
+                            <input
+                                type="password"
+                                id="cvv"
+                                maxlength="3"
+                                minlength="3"
+                                inputmode="numeric"
+                                placeholder="3-digit CVV"
+                                autocomplete="off"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                            id="submitCardBtn">
+                            Submit Card
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="cancelCardBtn">
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+            <section class="cards-summary">
+
+                <div class="summary-box">
+                    <p>Total Cards</p>
+                    <h3 id="totalCards">0</h3>
+                </div>
+
+                <div class="summary-box">
+                    <p>Active Cards</p>
+                    <h3 id="activeCards">0</h3>
+                </div>
+
+                <div class="summary-box">
+                    <p>Blocked Cards</p>
+                    <h3 id="blockedCards">0</h3>
+                </div>
+
+            </section>
+
+
+            <!-- SAVED CARDS -->
+            <section class="cards-section">
+
+                <h3>Your Linked Cards</h3>
+
+                <div class="cards-grid" id="cardsGrid">
+
+                    <div class="loading">
+                        Loading your cards...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <footer class="footer">
+            FinAssist · AI-Assisted Smart Banking Services
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
